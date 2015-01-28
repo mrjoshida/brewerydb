@@ -44,10 +44,11 @@ class BreweryDb:
     def __make_complex_endpoint_fun(name, method = 'get'):
         @staticmethod
         def _function(id, options={}):
+            endpoint = "/" + name[0] + "/" + id + "/" + name[1]
             if method == 'post':
-                return BreweryDb._post("/" + name[0] + "/" + id + "/" + name[1], options)
+                return BreweryDb._post(endpoint, options)
             else:
-                return BreweryDb._get("/" + name[0] + "/" + id + "/" + name[1], options)
+                return BreweryDb._get(endpoint, options)
         return _function
 
     @staticmethod
@@ -90,11 +91,11 @@ class BreweryDb:
         for endpoint in complex_endpoints:
             fun = BreweryDb.__make_complex_endpoint_fun(endpoint.split(':'))
             setattr(BreweryDb, endpoint.replace(':', '_'), fun)
-            fun_post = BreweryDb.__make_complex_endpoint_fun(endpoint)
+            fun_post = BreweryDb.__make_complex_endpoint_fun(endpoint.split(':'), 'post')
             setattr(BreweryDb, endpoint.replace(':', '_') + '_post', fun_post)
             
         for endpoint in double_param_endpoints:
             fun = BreweryDb.__make_doublearg_endpoint_fun(endpoint.split(':'))
             setattr(BreweryDb, endpoint.replace(':', '_'), fun)
-            fun_post = BreweryDb.__make_doublearg_endpoint_fun(endpoint)
+            fun_post = BreweryDb.__make_doublearg_endpoint_fun(endpoint.split(':'), 'post')
             setattr(BreweryDb, endpoint.replace(':', '_') + '_post', fun_post)
