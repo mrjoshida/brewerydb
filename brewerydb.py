@@ -6,14 +6,14 @@ API_KEY = ""
 
 simple_endpoints = ["beers", "beer/random", "breweries", "categories", "events",
                     "featured", "features", "fluidsizes", "glassware",
-                    "locations", "guilds", "heartbeat", "ingredients",
+                    "locations", "guilds", "heartbeat", "ingredients", "menu", 
                     "search", "search/upc", "socialsites", "styles"]
 
 single_param_endpoints = ["beer", "brewery", "category", "event",
                           "feature", "glass", "guild", "ingredient",
                           "location", "socialsite", "style", "menu"]
 
-complex_endpoints = ["event:breweries", "event:beers", "beer;events", 
+complex_endpoints = ["event:breweries", "event:beers", "beer:events", 
                      "brewery:events"]
 
 double_param_endpoints = ["event:brewery", "event:beer"]
